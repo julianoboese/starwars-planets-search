@@ -3,7 +3,7 @@ import PlanetsContext from '../context/PlanetsContext';
 import fetchPlanets from '../services/fetchPlanets';
 
 function Table() {
-  const { data, setData } = useContext(PlanetsContext);
+  const { data, setData, filterByName } = useContext(PlanetsContext);
 
   useEffect(() => {
     async function getPlanets() {
@@ -26,10 +26,11 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {data.map((planet) => (
-          <tr key={ planet.name }>
-            {Object.values(planet).map((item) => <td key={ item }>{item}</td>)}
-          </tr>))}
+        {data.filter((planet) => planet.name.toLowerCase().includes(filterByName.name))
+          .map((planet) => (
+            <tr key={ planet.name }>
+              {Object.values(planet).map((item) => <td key={ item }>{item}</td>)}
+            </tr>))}
       </tbody>
     </table>
   );
