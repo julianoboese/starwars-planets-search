@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Filters() {
-  const { setFilterByName,
-    filterByNumericValues, setFilterByNumericValues } = useContext(PlanetsContext);
+  const { setFilterByName, filterByNumericValues, setFilterByNumericValues,
+    usedFilters, setUsedFilters } = useContext(PlanetsContext);
   const columns = ['population', 'orbital_period', 'diameter', 'rotation_period',
     'surface_water'];
   const comparisons = ['maior que', 'menor que', 'igual a'];
@@ -13,6 +13,12 @@ function Filters() {
     comparison: 'maior que',
     value: 0,
   });
+
+  useEffect(() => {
+    const columnsFiltered = filterByNumericValues
+      .map((numericFilter) => numericFilter.column);
+    setUsedFilters(columnsFiltered);
+  }, [filterByNumericValues, setUsedFilters]);
 
   const handleNumericFilterChange = ({ target }) => {
     setCurrentNumericFilter({ ...currentNumericFilter, [target.name]: target.value });
@@ -37,9 +43,10 @@ function Filters() {
         name="column"
         onChange={ handleNumericFilterChange }
       >
-        {columns.map((column) => (
-          <option key={ column }>{column}</option>
-        ))}
+        {columns.filter((column) => !usedFilters.includes(column))
+          .map((column) => (
+            <option key={ column }>{column}</option>
+          ))}
       </select>
       <select
         data-testid="comparison-filter"
