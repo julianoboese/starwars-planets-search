@@ -1,10 +1,11 @@
-import { Button, FormControl, InputLabel, NativeSelect, TextField } from '@mui/material';
+import { Button, FormControl, InputLabel, NativeSelect, Stack,
+  TextField } from '@mui/material';
 import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import useRefreshFilters from '../hooks/useRefreshFilters';
 
-function Filters() {
-  const { columns, setFilterByName, filterByNumericValues, setFilterByNumericValues,
+function NumericFilters() {
+  const { columns, filterByNumericValues, setFilterByNumericValues,
     usedFilters } = useContext(PlanetsContext);
 
   const [currentNumericFilter, setCurrentNumericFilter] = useRefreshFilters();
@@ -19,17 +20,8 @@ function Filters() {
   };
 
   return (
-    <>
-      <form onSubmit={ handleSubmit }>
-        <TextField
-          label="Name"
-          type="text"
-          name="name"
-          onChange={ ({ target }) => setFilterByName(
-            { name: target.value.toLowerCase() },
-          ) }
-          inputProps={ { 'data-testid': 'name-filter' } }
-        />
+    <form onSubmit={ handleSubmit }>
+      <Stack direction="row" spacing={ 2 } alignItems="center">
         <FormControl variant="standard" sx={ { m: 1, minWidth: 120 } }>
           <InputLabel>
             Coluna
@@ -75,18 +67,21 @@ function Filters() {
           type="submit"
           variant="outlined"
           data-testid="button-filter"
+          sx={ { p: 1.75 } }
         >
           Filtrar
         </Button>
-      </form>
-      <Button
-        type="button"
-        variant="outlined"
-        data-testid="button-remove-filters"
-        onClick={ () => setFilterByNumericValues([]) }
-      >
-        Remover Filtros
-      </Button>
+        <Button
+          type="button"
+          variant="outlined"
+          color="secondary"
+          data-testid="button-remove-filters"
+          sx={ { mx: 8, p: 1.75 } }
+          onClick={ () => setFilterByNumericValues([]) }
+        >
+          Remover Filtros
+        </Button>
+      </Stack>
       <ul>
         {filterByNumericValues.map(({ column, comparison, value }) => (
           <li key={ column } data-testid="filter">
@@ -101,8 +96,8 @@ function Filters() {
           </li>
         ))}
       </ul>
-    </>
+    </form>
   );
 }
 
-export default Filters;
+export default NumericFilters;
