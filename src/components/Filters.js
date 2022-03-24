@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import useRefreshFilters from '../hooks/useRefreshFilters';
@@ -54,12 +55,13 @@ function Filters() {
           name="value"
           onChange={ handleNumericFilterChange }
         />
-        <button
+        <Button
           type="submit"
+          variant="outlined"
           data-testid="button-filter"
         >
           Filtrar
-        </button>
+        </Button>
       </form>
       <button
         type="button"
@@ -78,7 +80,6 @@ function Filters() {
                 .filter((numericFilter) => numericFilter.column !== column)) }
             >
               X
-
             </button>
           </li>
         ))}
