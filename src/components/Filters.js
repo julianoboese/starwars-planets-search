@@ -49,9 +49,7 @@ function Filters() {
           onChange={ handleNumericFilterChange }
         >
           {columns.filter((column) => !usedFilters.includes(column))
-            .map((column) => (
-              <option key={ column }>{column}</option>
-            ))}
+            .map((column) => (<option key={ column }>{column}</option>))}
         </select>
         <select
           data-testid="comparison-filter"

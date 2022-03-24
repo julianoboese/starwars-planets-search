@@ -10,6 +10,7 @@ function PlanetsProvider({ children }) {
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   const [filteredPlanets, setFilteredPlanets] = useState([]);
   const [usedFilters, setUsedFilters] = useState([]);
+  const [order, setOrder] = useState({});
 
   const context = {
     data,
@@ -23,6 +24,8 @@ function PlanetsProvider({ children }) {
     setFilteredPlanets,
     usedFilters,
     setUsedFilters,
+    order,
+    setOrder,
   };
 
   return (

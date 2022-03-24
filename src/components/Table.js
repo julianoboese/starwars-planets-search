@@ -4,7 +4,7 @@ import fetchPlanets from '../services/fetchPlanets';
 
 function Table() {
   const { data, setData, filterByName, filterByNumericValues,
-    filteredPlanets, setFilteredPlanets } = useContext(PlanetsContext);
+    filteredPlanets, setFilteredPlanets, order } = useContext(PlanetsContext);
 
   useEffect(() => {
     async function getPlanets() {
@@ -33,6 +33,21 @@ function Table() {
     'Gravity', 'Terrain', 'Surface Water', 'Population', 'Films', 'Created', 'Edited',
     'URL'];
 
+  const renderedPlanets = filteredPlanets
+    .filter((planet) => planet.name.toLowerCase().includes(filterByName.name))
+    .sort((planetA, planetB) => planetA.name.localeCompare(planetB.name))
+    .sort((planetA) => {
+      const SORT_A_AFTER_B = 1;
+      const SORT_A_BEFORE_B = -1;
+      if (Number.isNaN(+planetA[order.column])) {
+        return SORT_A_AFTER_B;
+      }
+      return SORT_A_BEFORE_B;
+    })
+    .sort((planetA, planetB) => (order.sort === 'ASC'
+      ? planetA[order.column] - planetB[order.column]
+      : planetB[order.column] - planetA[order.column]));
+
   return (
     <table>
       <thead>
@@ -41,11 +56,12 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {filteredPlanets
-          .filter((planet) => planet.name.toLowerCase().includes(filterByName.name))
+        {renderedPlanets
           .map((planet) => (
             <tr key={ planet.name }>
-              {Object.values(planet).map((item) => <td key={ item }>{item}</td>)}
+              {Object.values(planet).map((item, index) => (
+                <td key={ item } data-testid={ index === 0 && 'planet-name' }>{item}</td>
+              ))}
             </tr>))}
       </tbody>
     </table>
