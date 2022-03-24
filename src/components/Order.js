@@ -23,11 +23,10 @@ function Order() {
   return (
     <form onSubmit={ handleSubmit }>
       <FormControl variant="standard" sx={ { m: 1, minWidth: 120 } }>
-        <InputLabel sx={ { color: 'rgba(255, 255, 255, 0.7)' } }>
+        <InputLabel>
           Ordenar
         </InputLabel>
         <NativeSelect
-          sx={ { color: 'white' } }
           inputProps={ {
             name: 'column',
             value: currentOrder.column,
@@ -35,13 +34,7 @@ function Order() {
             onChange: handleOrderChange,
           } }
         >
-          {columns.map((column) => (
-            <option
-              key={ column }
-              style={ { backgroundColor: 'black' } }
-            >
-              {column}
-            </option>))}
+          {columns.map((column) => (<option key={ column }>{column}</option>))}
         </NativeSelect>
       </FormControl>
       <FormControl>

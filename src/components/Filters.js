@@ -22,19 +22,19 @@ function Filters() {
     <>
       <form onSubmit={ handleSubmit }>
         <TextField
+          label="Name"
           type="text"
           name="name"
           onChange={ ({ target }) => setFilterByName(
             { name: target.value.toLowerCase() },
           ) }
-          inputProps={ { 'data-testid': 'name-filter', style: { color: 'white' } } }
+          inputProps={ { 'data-testid': 'name-filter' } }
         />
         <FormControl variant="standard" sx={ { m: 1, minWidth: 120 } }>
-          <InputLabel sx={ { color: 'rgba(255, 255, 255, 0.7)' } }>
+          <InputLabel>
             Coluna
           </InputLabel>
           <NativeSelect
-            sx={ { color: 'white' } }
             inputProps={ {
               name: 'column',
               value: currentNumericFilter.column,
@@ -43,21 +43,14 @@ function Filters() {
             } }
           >
             {columns.filter((column) => !usedFilters.includes(column))
-              .map((column) => (
-                <option
-                  key={ column }
-                  style={ { backgroundColor: 'black' } }
-                >
-                  {column}
-                </option>))}
+              .map((column) => (<option key={ column }>{column}</option>))}
           </NativeSelect>
         </FormControl>
         <FormControl variant="standard" sx={ { m: 1, minWidth: 120 } }>
-          <InputLabel sx={ { color: 'rgba(255, 255, 255, 0.7)' } }>
+          <InputLabel>
             Operador
           </InputLabel>
           <NativeSelect
-            sx={ { color: 'white' } }
             inputProps={ {
               name: 'comparison',
               value: currentNumericFilter.comparison,
@@ -65,9 +58,9 @@ function Filters() {
               onChange: handleNumericFilterChange,
             } }
           >
-            <option style={ { backgroundColor: 'black' } }>maior que</option>
-            <option style={ { backgroundColor: 'black' } }>menor que</option>
-            <option style={ { backgroundColor: 'black' } }>igual a</option>
+            <option>maior que</option>
+            <option>menor que</option>
+            <option>igual a</option>
           </NativeSelect>
         </FormControl>
         <TextField
@@ -75,7 +68,7 @@ function Filters() {
           value={ currentNumericFilter.value }
           name="value"
           onChange={ handleNumericFilterChange }
-          inputProps={ { 'data-testid': 'value-filter', style: { color: 'white' } } }
+          inputProps={ { 'data-testid': 'value-filter' } }
           sx={ { maxWidth: '100px' } }
         />
         <Button

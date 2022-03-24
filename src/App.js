@@ -9,6 +9,7 @@ import Logo from './components/Logo';
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
       main: 'rgb(255, 255, 0)' },
   },
