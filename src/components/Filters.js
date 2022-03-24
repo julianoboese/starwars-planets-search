@@ -1,39 +1,25 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
+import useRefreshFilters from '../hooks/useRefreshFilters';
 
 function Filters() {
   const { columns, setFilterByName, filterByNumericValues, setFilterByNumericValues,
-    usedFilters, setUsedFilters } = useContext(PlanetsContext);
-  const comparisons = ['maior que', 'menor que', 'igual a'];
+    usedFilters } = useContext(PlanetsContext);
 
-  const [currentNumericFilter, setCurrentNumericFilter] = useState({
-    column: 'population',
-    comparison: 'maior que',
-    value: 0,
-  });
-
-  useEffect(() => {
-    const filteredColumns = filterByNumericValues.map(({ column }) => column);
-    setUsedFilters(filteredColumns);
-    setCurrentNumericFilter({
-      column: columns.find((column) => !filteredColumns.includes(column)),
-      comparison: 'maior que',
-      value: 0,
-    });
-  }, [columns, filterByNumericValues, setUsedFilters]);
+  const [currentNumericFilter, setCurrentNumericFilter] = useRefreshFilters();
 
   const handleNumericFilterChange = ({ target }) => {
     setCurrentNumericFilter({ ...currentNumericFilter, [target.name]: target.value });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setFilterByNumericValues([...filterByNumericValues, currentNumericFilter]);
+  };
+
   return (
     <>
-      <form
-        onSubmit={ (event) => {
-          event.preventDefault();
-          setFilterByNumericValues([...filterByNumericValues, currentNumericFilter]);
-        } }
-      >
+      <form onSubmit={ handleSubmit }>
         <input
           type="text"
           data-testid="name-filter"
@@ -57,9 +43,9 @@ function Filters() {
           name="comparison"
           onChange={ handleNumericFilterChange }
         >
-          {comparisons.map((comparison) => (
-            <option key={ comparison }>{comparison}</option>
-          ))}
+          <option>maior que</option>
+          <option>menor que</option>
+          <option>igual a</option>
         </select>
         <input
           type="number"

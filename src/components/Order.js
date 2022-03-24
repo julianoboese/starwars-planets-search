@@ -13,13 +13,13 @@ function Order() {
     setCurrentOrder({ ...currentOrder, [target.name]: target.value });
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setOrder(currentOrder);
+  };
+
   return (
-    <form
-      onSubmit={ (event) => {
-        event.preventDefault();
-        setOrder(currentOrder);
-      } }
-    >
+    <form onSubmit={ handleSubmit }>
       <select
         data-testid="column-sort"
         value={ currentOrder.column }
