@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, FormControl, InputLabel, NativeSelect, TextField } from '@mui/material';
 import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import useRefreshFilters from '../hooks/useRefreshFilters';
@@ -21,39 +21,62 @@ function Filters() {
   return (
     <>
       <form onSubmit={ handleSubmit }>
-        <input
+        <TextField
           type="text"
-          data-testid="name-filter"
           name="name"
           onChange={ ({ target }) => setFilterByName(
             { name: target.value.toLowerCase() },
           ) }
+          inputProps={ { 'data-testid': 'name-filter', style: { color: 'white' } } }
         />
-        <select
-          data-testid="column-filter"
-          value={ currentNumericFilter.column }
-          name="column"
-          onChange={ handleNumericFilterChange }
-        >
-          {columns.filter((column) => !usedFilters.includes(column))
-            .map((column) => (<option key={ column }>{column}</option>))}
-        </select>
-        <select
-          data-testid="comparison-filter"
-          value={ currentNumericFilter.comparison }
-          name="comparison"
-          onChange={ handleNumericFilterChange }
-        >
-          <option>maior que</option>
-          <option>menor que</option>
-          <option>igual a</option>
-        </select>
-        <input
+        <FormControl variant="standard" sx={ { m: 1, minWidth: 120 } }>
+          <InputLabel sx={ { color: 'rgba(255, 255, 255, 0.7)' } }>
+            Coluna
+          </InputLabel>
+          <NativeSelect
+            sx={ { color: 'white' } }
+            inputProps={ {
+              name: 'column',
+              value: currentNumericFilter.column,
+              'data-testid': 'column-filter',
+              onChange: handleNumericFilterChange,
+            } }
+          >
+            {columns.filter((column) => !usedFilters.includes(column))
+              .map((column) => (
+                <option
+                  key={ column }
+                  style={ { backgroundColor: 'black' } }
+                >
+                  {column}
+                </option>))}
+          </NativeSelect>
+        </FormControl>
+        <FormControl variant="standard" sx={ { m: 1, minWidth: 120 } }>
+          <InputLabel sx={ { color: 'rgba(255, 255, 255, 0.7)' } }>
+            Operador
+          </InputLabel>
+          <NativeSelect
+            sx={ { color: 'white' } }
+            inputProps={ {
+              name: 'comparison',
+              value: currentNumericFilter.comparison,
+              'data-testid': 'comparison-filter',
+              onChange: handleNumericFilterChange,
+            } }
+          >
+            <option style={ { backgroundColor: 'black' } }>maior que</option>
+            <option style={ { backgroundColor: 'black' } }>menor que</option>
+            <option style={ { backgroundColor: 'black' } }>igual a</option>
+          </NativeSelect>
+        </FormControl>
+        <TextField
           type="number"
           value={ currentNumericFilter.value }
-          data-testid="value-filter"
           name="value"
           onChange={ handleNumericFilterChange }
+          inputProps={ { 'data-testid': 'value-filter', style: { color: 'white' } } }
+          sx={ { maxWidth: '100px' } }
         />
         <Button
           type="submit"
@@ -63,13 +86,14 @@ function Filters() {
           Filtrar
         </Button>
       </form>
-      <button
+      <Button
         type="button"
+        variant="outlined"
         data-testid="button-remove-filters"
         onClick={ () => setFilterByNumericValues([]) }
       >
         Remover Filtros
-      </button>
+      </Button>
       <ul>
         {filterByNumericValues.map(({ column, comparison, value }) => (
           <li key={ column } data-testid="filter">

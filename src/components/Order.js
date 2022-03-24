@@ -1,3 +1,5 @@
+import { Button, FormControl, FormControlLabel, InputLabel, NativeSelect,
+  Radio, RadioGroup } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
@@ -20,37 +22,55 @@ function Order() {
 
   return (
     <form onSubmit={ handleSubmit }>
-      <select
-        data-testid="column-sort"
-        value={ currentOrder.column }
-        name="column"
-        onChange={ handleOrderChange }
+      <FormControl variant="standard" sx={ { m: 1, minWidth: 120 } }>
+        <InputLabel sx={ { color: 'rgba(255, 255, 255, 0.7)' } }>
+          Ordenar
+        </InputLabel>
+        <NativeSelect
+          sx={ { color: 'white' } }
+          inputProps={ {
+            name: 'column',
+            value: currentOrder.column,
+            'data-testid': 'column-sort',
+            onChange: handleOrderChange,
+          } }
+        >
+          {columns.map((column) => (
+            <option
+              key={ column }
+              style={ { backgroundColor: 'black' } }
+            >
+              {column}
+            </option>))}
+        </NativeSelect>
+      </FormControl>
+      <FormControl>
+        <RadioGroup
+          name="sort"
+          value={ currentOrder.sort }
+          onChange={ handleOrderChange }
+        >
+          <FormControlLabel
+            value="ASC"
+            control={ <Radio /> }
+            label="Ascendente"
+            data-testid="column-sort-input-asc"
+          />
+          <FormControlLabel
+            value="DESC"
+            control={ <Radio /> }
+            label="Descendente"
+            data-testid="column-sort-input-desc"
+          />
+        </RadioGroup>
+      </FormControl>
+      <Button
+        type="submit"
+        variant="outlined"
+        data-testid="column-sort-button"
       >
-        {columns.map((column) => (<option key={ column }>{column}</option>))}
-      </select>
-      <label htmlFor="ASC">
-        <input
-          type="radio"
-          name="sort"
-          value="ASC"
-          id="ASC"
-          onChange={ handleOrderChange }
-          data-testid="column-sort-input-asc"
-        />
-        Ascendente
-      </label>
-      <label htmlFor="DESC">
-        <input
-          type="radio"
-          name="sort"
-          value="DESC"
-          id="DESC"
-          onChange={ handleOrderChange }
-          data-testid="column-sort-input-desc"
-        />
-        Descendente
-      </label>
-      <button type="submit" data-testid="column-sort-button">Ordenar</button>
+        Ordenar
+      </Button>
     </form>
   );
 }

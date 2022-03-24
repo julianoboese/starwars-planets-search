@@ -1,6 +1,6 @@
-import { Container, createTheme, Paper, Stack, ThemeProvider } from '@mui/material';
+import { Box, createTheme, CssBaseline, Paper, Stack,
+  ThemeProvider } from '@mui/material';
 import React from 'react';
-import './App.css';
 import Filters from './components/Filters';
 import Order from './components/Order';
 import DataTable from './components/DataTable';
@@ -15,7 +15,7 @@ const theme = createTheme({
 });
 
 const filterAndSort = () => (
-  <Stack>
+  <Stack direction="row">
     <Filters />
     <Order />
   </Stack>
@@ -25,13 +25,17 @@ function App() {
   return (
     <ThemeProvider theme={ theme }>
       <PlanetsProvider>
-        <Container>
+        <CssBaseline />
+        <Box sx={ { minWidth: '100%', m: 0, p: 8, bgcolor: 'black' } }>
           <Logo />
-          <Paper>
+          <Paper
+            elevation={ 2 }
+            sx={ { p: 2, bgcolor: 'rgb(30, 30, 30)', color: 'white' } }
+          >
             {filterAndSort()}
             <DataTable />
           </Paper>
-        </Container>
+        </Box>
       </PlanetsProvider>
     </ThemeProvider>
   );
