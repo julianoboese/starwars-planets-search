@@ -27,8 +27,16 @@ function App() {
     <ThemeProvider theme={ theme }>
       <PlanetsProvider>
         <CssBaseline />
-        <Box sx={ { minWidth: '100%', m: 0, p: 8, bgcolor: 'black' } }>
-          <Logo />
+        <Logo />
+        <Box
+          sx={ { position: 'absolute',
+            top: '100vh',
+            minWidth: '100%',
+            maxWidth: '100%',
+            m: 0,
+            p: 8,
+            bgcolor: 'black' } }
+        >
           <Paper
             elevation={ 2 }
             sx={ { p: 2, bgcolor: 'rgb(30, 30, 30)', color: 'white' } }
