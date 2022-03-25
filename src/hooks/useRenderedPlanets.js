@@ -10,11 +10,13 @@ function useRenderedPlanets() {
   useEffect(() => {
     async function getPlanets() {
       const planets = await fetchPlanets();
+      // https://www.w3schools.com/howto/howto_js_remove_property_object.asp
       planets.forEach((planet) => delete planet.residents);
       setData(planets);
     }
     getPlanets();
 
+    // https://github.com/fisshy/react-scroll
     scroller.scrollTo('data-table', {
       duration: 1750,
       delay: 5000,
@@ -38,6 +40,7 @@ function useRenderedPlanets() {
 
   const renderedPlanets = filteredPlanets
     .filter((planet) => planet.name.toLowerCase().includes(filterByName.name))
+    // https://stackoverflow.com/questions/6712034/sort-array-by-firstname-alphabetically-in-javascript
     .sort((planetA, planetB) => planetA.name.localeCompare(planetB.name))
     .sort((planetA) => {
       const SORT_A_AFTER_B = 1;

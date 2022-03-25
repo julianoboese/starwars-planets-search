@@ -78,7 +78,7 @@ function NumericFilters() {
           color="secondary"
           data-testid="button-remove-filters"
           disabled={ filterByNumericValues.length === 0 }
-          sx={ { mx: 8, p: 1.75 } }
+          sx={ { p: 1.75 } }
           onClick={ () => setFilterByNumericValues([]) }
         >
           Remover Filtros
