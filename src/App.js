@@ -7,6 +7,7 @@ import DataTable from './components/DataTable';
 import PlanetsProvider from './context/PlanetsProvider';
 import Logo from './components/Logo';
 import NameFilter from './components/NameFilter';
+import background from './starWarsAnimation/bg.jpg';
 
 const theme = createTheme({
   palette: {
@@ -28,7 +29,7 @@ const filterAndSort = () => (
       spacing={ 8 }
       justifyContent="center"
       alignItems="flex-start"
-      sx={ { pt: 2, flexWrap: 'wrap' } }
+      sx={ { flexWrap: 'wrap' } }
     >
       <NumericFilters />
       <Order />
@@ -49,12 +50,12 @@ function App() {
             minWidth: '100%',
             maxWidth: '100%',
             p: 8,
-            pb: 4,
-            bgcolor: 'black' } }
+            pb: 2,
+            background: `black url(${background})` } }
         >
           <Paper
             elevation={ 2 }
-            sx={ { p: 4 } }
+            sx={ { p: 2 } }
           >
             {filterAndSort()}
             <DataTable />
