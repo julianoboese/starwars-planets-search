@@ -31,7 +31,7 @@ function DataTable() {
   const renderedPlanets = useRenderedPlanets();
 
   return (
-    <TableContainer component={ Paper } sx={ { maxHeight: 500 } }>
+    <TableContainer component={ Paper } sx={ { maxHeight: 480 } }>
       <Table stickyHeader sx={ { minWidth: 700 } } aria-label="customized table">
         <TableHead>
           <TableRow>

@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { scroller } from 'react-scroll';
 import PlanetsContext from '../context/PlanetsContext';
 import fetchPlanets from '../services/fetchPlanets';
 
@@ -13,6 +14,12 @@ function useRenderedPlanets() {
       setData(planets);
     }
     getPlanets();
+
+    scroller.scrollTo('data-table', {
+      duration: 1750,
+      delay: 5000,
+      smooth: 'easeInOutCubic',
+    });
   }, [setData]);
 
   useEffect(() => {

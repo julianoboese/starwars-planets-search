@@ -1,6 +1,7 @@
 import { Box, createTheme, CssBaseline, Paper, Stack,
   ThemeProvider } from '@mui/material';
 import React from 'react';
+import { Element } from 'react-scroll';
 import NumericFilters from './components/NumericFilters';
 import Order from './components/Order';
 import DataTable from './components/DataTable';
@@ -53,9 +54,10 @@ function App() {
             pb: 2,
             background: `black url(${background})` } }
         >
+          <Element name="data-table" />
           <Paper
             elevation={ 2 }
-            sx={ { p: 2 } }
+            sx={ { p: 4 } }
           >
             {filterAndSort()}
             <DataTable />
