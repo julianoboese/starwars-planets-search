@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import star from '../starWarsAnimation/star.svg';
-import wars from '../starWarsAnimation/wars.svg';
-import '../starWarsAnimation/starWars.css';
-import background from '../starWarsAnimation/bg.jpg';
+import star from '../assets/starWarsAnimation/star.svg';
+import wars from '../assets/starWarsAnimation/wars.svg';
+import '../assets/starWarsAnimation/starWars.css';
+import background from '../assets/images/background.jpg';
 
 function Logo() {
   return (

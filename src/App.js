@@ -8,7 +8,7 @@ import DataTable from './components/DataTable';
 import PlanetsProvider from './context/PlanetsProvider';
 import Logo from './components/Logo';
 import NameFilter from './components/NameFilter';
-import background from './starWarsAnimation/bg.jpg';
+import background from './assets/images/background.jpg';
 
 const theme = createTheme({
   palette: {
