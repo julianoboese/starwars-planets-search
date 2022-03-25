@@ -1,5 +1,6 @@
-import { Button, FormControl, InputLabel, NativeSelect, Stack,
-  TextField } from '@mui/material';
+import { Button, FormControl, IconButton, InputLabel, List, ListItem, ListItemText,
+  NativeSelect, Paper, Stack, TextField } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import useRefreshFilters from '../hooks/useRefreshFilters';
@@ -21,7 +22,7 @@ function NumericFilters() {
 
   return (
     <form onSubmit={ handleSubmit }>
-      <Stack direction="row" spacing={ 2 } alignItems="center">
+      <Stack direction="row" spacing={ 2 } alignItems="center" sx={ { mt: 1.25 } }>
         <FormControl variant="standard" sx={ { m: 1, minWidth: 120 } }>
           <InputLabel>
             Coluna
@@ -76,26 +77,40 @@ function NumericFilters() {
           variant="outlined"
           color="secondary"
           data-testid="button-remove-filters"
+          disabled={ filterByNumericValues.length === 0 }
           sx={ { mx: 8, p: 1.75 } }
           onClick={ () => setFilterByNumericValues([]) }
         >
           Remover Filtros
         </Button>
       </Stack>
-      <ul>
-        {filterByNumericValues.map(({ column, comparison, value }) => (
-          <li key={ column } data-testid="filter">
-            <span>{`${column} ${comparison} ${value}`}</span>
-            <button
-              type="button"
-              onClick={ () => setFilterByNumericValues(filterByNumericValues
-                .filter((numericFilter) => numericFilter.column !== column)) }
-            >
-              X
-            </button>
-          </li>
-        ))}
-      </ul>
+      {filterByNumericValues.length > 0
+      && (
+        <Paper elevation={ 2 } sx={ { maxWidth: '300px', my: 2, bgcolor: 'black' } }>
+          <List dense>
+            {filterByNumericValues.map(({ column, comparison, value }) => (
+              <ListItem
+                key={ column }
+                data-testid="filter"
+                secondaryAction={
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={ () => setFilterByNumericValues(filterByNumericValues
+                      .filter((numericFilter) => numericFilter.column !== column)) }
+                  >
+                    <DeleteIcon color="secondary" />
+                  </IconButton>
+                }
+              >
+                <ListItemText
+                  primary={ `${column} ${comparison} ${value}` }
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Paper>
+      )}
     </form>
   );
 }

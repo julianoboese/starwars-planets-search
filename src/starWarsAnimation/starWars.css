@@ -6,22 +6,22 @@
 
 /* Animation properties */
 .star {
-  animation: star 8s ease-out;
+  animation: star 5s ease-out;
   top: -0.75em;
 }
 
 .wars {
-  animation: wars 8s ease-out;
+  animation: wars 5s ease-out;
   bottom: -0.5em;
 }
 
 .byline span {
-  animation: spin-letters 8s linear;
+  animation: spin-letters 5s linear;
   display: inline-block;
 }
 
 .byline {
-  animation: move-byline 8s linear;
+  animation: move-byline 5s linear;
   color: white;
   font-family: ITC serif Gothic , Lato , sans-serif;
   font-size: 2.25em;

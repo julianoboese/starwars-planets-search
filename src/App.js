@@ -21,14 +21,14 @@ const theme = createTheme({
 });
 
 const filterAndSort = () => (
-  <Stack direction="column" spacing={ 2 } alignItems="center">
+  <Stack direction="column" spacing={ 2 } alignItems="center" sx={ { mb: 2 } }>
     <NameFilter />
     <Stack
       direction="row"
       spacing={ 8 }
       justifyContent="center"
-      alignItems="flex-end"
-      sx={ { flexWrap: 'wrap' } }
+      alignItems="flex-start"
+      sx={ { pt: 2, flexWrap: 'wrap' } }
     >
       <NumericFilters />
       <Order />
@@ -54,7 +54,7 @@ function App() {
         >
           <Paper
             elevation={ 2 }
-            sx={ { p: 2, bgcolor: 'rgb(30, 30, 30)', color: 'white' } }
+            sx={ { p: 4 } }
           >
             {filterAndSort()}
             <DataTable />
