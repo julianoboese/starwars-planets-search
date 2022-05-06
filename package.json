@@ -1,6 +1,7 @@
 {
-  "name": "starwars-planets-search2",
+  "name": "starwars-planets-search",
   "version": "0.1.0",
+  "homepage": "https://julianoboese.github.io/starwars-planets-search",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
