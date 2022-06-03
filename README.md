@@ -18,6 +18,7 @@ Aplicação que lista e filtra os planetas do universo de Star Wars usando Conte
 - React
 - Contex API
 - React Hooks
+- Material UI
 
 ## 📌 Habilidades
 
@@ -25,7 +26,8 @@ Aplicação que lista e filtra os planetas do universo de Star Wars usando Conte
 
 - Utilizar a Context API do React para gerenciar estado;
 - Utilizar os React Hooks useContext, useState e useEffect;
-- Criar React Hooks customizados.
+- Criar React Hooks customizados;
+- Estilizar componentes React com a biblioteca Material UI.
 
 ## ⬇️ Instalando dependências
 
